@@ -1,0 +1,1738 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap");
+
+/* =========================================
+   01 - ألوان الشعار والمتغيرات
+========================================= */
+
+:root {
+  /* ألوان الشعار الأساسية */
+  --logo-gold: #C07B28;
+  --logo-red: #9E2A2B;
+  --logo-dark: #1A1A1A;
+  --logo-white: #FFFFFF;
+  --logo-warm-bg: #FDFBF7;
+
+  /* درجات مساعدة */
+  --gold-dark: #925717;
+  --gold-light: #F5DFBD;
+  --gold-pale: #FFF7EA;
+  --red-dark: #761D20;
+  --red-light: #F9E8E7;
+
+  --text-primary: #26211D;
+  --text-secondary: #6E655D;
+  --text-muted: #94877B;
+
+  --bg-card: #FFFFFF;
+  --bg-soft: #F8F3EC;
+  --border: #EBE1D5;
+
+  /* الظلال */
+  --shadow-small: 0 4px 18px rgba(26,26,26,.045);
+  --shadow-medium: 0 12px 35px rgba(26,26,26,.075);
+  --shadow-large: 0 25px 65px rgba(26,26,26,.13);
+
+  /* المقاسات */
+  --container: 1200px;
+  --header-height: 82px;
+
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+
+/* =========================================
+   02 - الإعدادات العامة
+========================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 110px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  direction: rtl;
+  font-family: "Cairo", sans-serif;
+  color: var(--text-primary);
+  background: var(--logo-warm-bg);
+  line-height: 1.9;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.menu-open,
+body.drawer-open {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  color: white;
+  background: var(--logo-gold);
+}
+
+:focus-visible {
+  outline: 3px solid var(--logo-gold);
+  outline-offset: 4px;
+}
+
+.container {
+  width: min(calc(100% - 40px), var(--container));
+  margin-inline: auto;
+}
+
+/* =========================================
+   03 - شريط تقدم التمرير
+========================================= */
+
+.progress {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2000;
+  height: 4px;
+  width: 0;
+  background: linear-gradient(
+    90deg,
+    var(--logo-red),
+    var(--logo-gold)
+  );
+  box-shadow: 0 2px 12px rgba(192,123,40,.3);
+  pointer-events: none;
+  transition: width .1s linear;
+}
+
+/* =========================================
+   04 - الهيدر
+========================================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  min-height: var(--header-height);
+  background: rgba(253,251,247,.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(255,255,255,.98);
+  box-shadow: var(--shadow-small);
+}
+
+.header-inner {
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+/* =========================================
+   05 - الشعار
+========================================= */
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.brand > img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  padding: 4px;
+  border-radius: 16px;
+  background: white;
+  border: 1px solid rgba(192,123,40,.16);
+}
+
+.brand-title {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.5;
+}
+
+.brand-title strong {
+  color: var(--logo-dark);
+  font-size: 1.28rem;
+  font-weight: 900;
+}
+
+.brand-title > span {
+  color: var(--logo-gold);
+  direction: ltr;
+  text-align: right;
+  font-family: Arial, sans-serif;
+  font-size: .61rem;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+}
+
+/* =========================================
+   06 - روابط التنقل
+========================================= */
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-right: auto;
+  margin-left: 22px;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 13px;
+  color: var(--text-secondary);
+  font-size: .9rem;
+  font-weight: 800;
+  transition: .3s ease;
+}
+
+.nav-link:hover {
+  color: var(--logo-gold);
+  background: var(--gold-pale);
+}
+
+.nav-link[aria-current="page"] {
+  color: var(--gold-dark);
+  background: var(--gold-pale);
+  box-shadow:
+    inset 0 0 0 1px rgba(192,123,40,.16);
+}
+
+/* =========================================
+   07 - زر القائمة
+========================================= */
+
+.menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 10px 19px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--logo-white);
+  color: var(--logo-dark);
+  font-size: .86rem;
+  font-weight: 800;
+  transition: .3s ease;
+}
+
+.menu-trigger:hover {
+  color: var(--logo-gold);
+  border-color: var(--logo-gold);
+  background: var(--gold-pale);
+  transform: translateY(-2px);
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 21px;
+  height: 22px;
+}
+
+.menu-icon i {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 10px;
+  background: currentColor;
+  transition: transform .3s ease;
+}
+
+.menu-trigger:hover .menu-icon i:nth-child(2) {
+  transform: translateX(-4px);
+}
+
+/* =========================================
+   08 - خلفية القائمة الجانبية
+========================================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1090;
+  background: rgba(26,26,26,.58);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity .35s ease,
+    visibility .35s ease;
+}
+
+.overlay.active,
+.overlay.open,
+.overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* =========================================
+   09 - القائمة الجانبية
+========================================= */
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1100;
+
+  width: min(370px, 90vw);
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 32px 25px;
+  overflow-y: auto;
+
+  background: var(--logo-white);
+  border-left: 4px solid var(--logo-gold);
+  box-shadow: var(--shadow-large);
+
+  transform: translateX(105%);
+  visibility: hidden;
+
+  transition:
+    transform .45s var(--ease),
+    visibility .45s;
+}
+
+.drawer.active,
+.drawer.open,
+.drawer.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid var(--border);
+}
+
+.drawer-head strong {
+  color: var(--logo-dark);
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 13px;
+  color: var(--logo-red);
+  background: var(--red-light);
+  font-size: 1.7rem;
+  line-height: 1;
+  transition: .3s ease;
+}
+
+.close-btn:hover {
+  color: white;
+  background: var(--logo-red);
+  transform: rotate(90deg);
+}
+
+.drawer-label {
+  margin: 28px 0 14px;
+  color: var(--text-muted);
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+.drawer-link {
+  display: flex;
+  align-items: center;
+  min-height: 55px;
+  padding: 13px 18px;
+  margin-bottom: 10px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: var(--bg-soft);
+  color: var(--text-primary);
+  font-size: .92rem;
+  font-weight: 800;
+  transition: .3s ease;
+}
+
+.drawer-link:hover {
+  color: var(--gold-dark);
+  background: var(--gold-pale);
+  border-color: rgba(192,123,40,.25);
+  transform: translateX(-5px);
+}
+
+.drawer-link[aria-current="page"] {
+  color: var(--gold-dark);
+  background: var(--gold-pale);
+  border-color: rgba(192,123,40,.3);
+  border-right: 4px solid var(--logo-gold);
+}
+
+.drawer-bottom {
+  margin-top: auto;
+  padding: 24px 10px 5px;
+  text-align: center;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  font-size: .82rem;
+  line-height: 2;
+}
+
+/* =========================================
+   10 - Hero
+========================================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 85px 0 95px;
+
+  background:
+    radial-gradient(
+      circle at 5% 20%,
+      rgba(192,123,40,.13),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 95% 80%,
+      rgba(158,42,43,.065),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      #FFFFFF 0%,
+      #FDFBF7 48%,
+      #FCF2E5 100%
+    );
+
+  border-bottom: 1px solid var(--border);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -170px;
+  right: -150px;
+  width: 390px;
+  height: 390px;
+  border: 60px solid rgba(192,123,40,.055);
+  border-radius: 50%;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translateX(50%);
+  width: 125px;
+  height: 4px;
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(
+    90deg,
+    var(--logo-red),
+    var(--logo-gold)
+  );
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 850px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 21px;
+  margin-bottom: 21px;
+  color: var(--gold-dark);
+  background: var(--gold-pale);
+  border: 1px solid rgba(192,123,40,.25);
+  border-radius: 50px;
+  font-size: .82rem;
+  font-weight: 800;
+}
+
+.hero h1 {
+  margin: 0 0 18px;
+  color: var(--logo-dark);
+  font-size: clamp(2.2rem, 5vw, 3.7rem);
+  font-weight: 900;
+  line-height: 1.45;
+  letter-spacing: -.8px;
+}
+
+.hero-inner > p {
+  max-width: 715px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 1.04rem;
+  line-height: 2.15;
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.chip {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 17px;
+  background: rgba(255,255,255,.8);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-secondary);
+  font-size: .79rem;
+  font-weight: 700;
+}
+
+/* =========================================
+   11 - المحتوى الرئيسي
+========================================= */
+
+.main {
+  padding: 65px 0 95px;
+  min-height: 50vh;
+}
+
+.privacy-layout {
+  display: grid;
+  grid-template-columns: 275px minmax(0,1fr);
+  align-items: start;
+  gap: 30px;
+}
+
+.content-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+/* =========================================
+   12 - فهرس سياسة الخصوصية
+========================================= */
+
+.toc {
+  position: sticky;
+  top: calc(var(--header-height) + 22px);
+
+  max-height:
+    calc(100dvh - var(--header-height) - 44px);
+
+  overflow-y: auto;
+
+  background: var(--logo-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-small);
+
+  padding: 27px 18px;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-light) transparent;
+}
+
+.toc h2 {
+  margin: 0 9px 18px;
+  padding-bottom: 17px;
+  border-bottom: 1px solid var(--border);
+  color: var(--logo-dark);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.toc-links {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.toc-links a {
+  display: block;
+  padding: 10px 13px;
+  border-right: 3px solid transparent;
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: .81rem;
+  font-weight: 700;
+  line-height: 1.85;
+  transition: all .3s ease;
+}
+
+.toc-links a:hover {
+  color: var(--gold-dark);
+  background: var(--gold-pale);
+  border-right-color: var(--logo-gold);
+  transform: translateX(-3px);
+}
+
+.toc-links a.active,
+.toc-links a[aria-current="location"] {
+  color: var(--gold-dark);
+  background: var(--gold-pale);
+  border-right-color: var(--logo-gold);
+  font-weight: 900;
+}
+
+/* =========================================
+   13 - التنبيهات
+========================================= */
+
+.notice {
+  display: block;
+  padding: 22px 25px;
+  background: linear-gradient(
+    110deg,
+    var(--gold-pale),
+    #FFFFFF
+  );
+  border: 1px solid rgba(192,123,40,.22);
+  border-right: 5px solid var(--logo-gold);
+  border-radius: var(--radius-md);
+  color: #71532C;
+  font-size: .9rem;
+  line-height: 2.15;
+  box-shadow: 0 5px 20px rgba(192,123,40,.045);
+}
+
+.notice strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--gold-dark);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.notice a {
+  color: var(--logo-red);
+  font-weight: 900;
+}
+
+.notice a:hover {
+  color: var(--gold-dark);
+}
+
+.notice u {
+  text-underline-offset: 4px;
+}
+
+.notice-danger,
+.delete-warning {
+  background: linear-gradient(
+    120deg,
+    var(--red-light),
+    #FFFFFF
+  );
+  border-color: rgba(158,42,43,.2);
+  border-right: 5px solid var(--logo-red);
+  color: var(--red-dark);
+}
+
+.notice-danger strong,
+.delete-warning strong,
+.panel .notice-danger strong {
+  color: var(--logo-red);
+}
+
+/* =========================================
+   14 - بطاقات المحتوى
+========================================= */
+
+.panel {
+  position: relative;
+  min-width: 0;
+  padding: clamp(25px, 4vw, 39px);
+  background: var(--logo-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-small);
+  scroll-margin-top: 115px;
+  transition:
+    border-color .35s ease,
+    box-shadow .35s ease,
+    transform .35s ease;
+}
+
+.panel:hover {
+  border-color: rgba(192,123,40,.32);
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-3px);
+}
+
+.panel h2 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 0 0 23px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  color: var(--logo-dark);
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-weight: 900;
+  line-height: 1.6;
+}
+
+.panel h2 .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  background: var(--gold-pale);
+  border: 1px solid rgba(192,123,40,.18);
+  color: var(--gold-dark);
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.panel p {
+  margin: 0 0 17px;
+  color: var(--text-secondary);
+  font-size: .96rem;
+  line-height: 2.3;
+}
+
+.panel p:last-child {
+  margin-bottom: 0;
+}
+
+.panel h3 {
+  color: var(--gold-dark);
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin: 24px 0 13px;
+}
+
+.panel ul,
+.panel ol {
+  padding-right: 25px;
+  color: var(--text-secondary);
+  line-height: 2.15;
+}
+
+.panel li {
+  margin-bottom: 10px;
+}
+
+.panel li::marker {
+  color: var(--logo-gold);
+}
+
+.panel strong {
+  color: var(--logo-dark);
+  font-weight: 800;
+}
+
+.panel a {
+  color: var(--logo-red);
+  font-weight: 800;
+}
+
+.panel a:hover {
+  color: var(--gold-dark);
+}
+
+.panel .notice {
+  margin-top: 22px;
+}
+
+.panel .notice strong {
+  color: var(--gold-dark);
+}
+
+/* =========================================
+   15 - صفحة حذف الحساب
+========================================= */
+
+.delete-wrap {
+  width: min(100%, 960px);
+  margin-inline: auto;
+}
+
+.delete-layout,
+.delete-content {
+  width: min(100%, 960px);
+  margin-inline: auto;
+}
+
+.delete-steps-section {
+  margin: 35px 0 30px;
+}
+
+.section-title {
+  margin: 0 0 8px;
+  color: var(--logo-dark);
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
+  font-weight: 900;
+  line-height: 1.6;
+}
+
+.helper {
+  display: block;
+  color: var(--text-muted);
+  font-size: .85rem;
+  line-height: 2;
+  margin: 8px 0 18px;
+}
+
+/* =========================================
+   16 - خطوات حذف الحساب
+========================================= */
+
+.steps,
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 18px;
+  margin: 25px 0 35px;
+}
+
+.step,
+.step-card {
+  position: relative;
+  min-width: 0;
+  padding: 27px 23px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--logo-white);
+  box-shadow: var(--shadow-small);
+  transition: all .35s ease;
+}
+
+.step:hover,
+.step-card:hover {
+  border-color: var(--logo-gold);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-medium);
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 53px;
+  height: 53px;
+  margin-bottom: 19px;
+  color: var(--logo-white);
+  background: linear-gradient(
+    135deg,
+    var(--logo-gold),
+    var(--gold-dark)
+  );
+  border-radius: 16px;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(192,123,40,.16);
+}
+
+.step h3,
+.step-card h3 {
+  font-size: 1.05rem;
+  color: var(--logo-dark);
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+
+.step p,
+.step-card p {
+  color: var(--text-secondary);
+  font-size: .88rem;
+  line-height: 2.05;
+  margin: 0;
+}
+
+/* =========================================
+   17 - جدول الاحتفاظ بالبيانات
+========================================= */
+
+.table-scroll,
+.table-wrap,
+.table-wrapper,
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 23px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: white;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+}
+
+.data-table {
+  min-width: 570px;
+}
+
+th {
+  padding: 17px 20px;
+  background: var(--logo-dark);
+  color: var(--logo-white);
+  font-size: .88rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+td {
+  padding: 17px 20px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  font-size: .87rem;
+  vertical-align: middle;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--bg-soft);
+}
+
+tbody tr:hover {
+  background: var(--gold-pale);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* =========================================
+   18 - نموذج حذف الحساب
+========================================= */
+
+#delete-form,
+#deleteForm,
+.delete-form {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 18px 22px;
+}
+
+.field {
+  min-width: 0;
+}
+
+.field.wide {
+  grid-column: 1 / -1;
+}
+
+.field label:not(.checkline),
+.form-group label:not(.checkline) {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--logo-dark);
+  font-size: .9rem;
+  font-weight: 800;
+}
+
+.required,
+.field label > span.required {
+  color: var(--logo-red);
+}
+
+.field > input:not([type="checkbox"]),
+.field > select,
+.field > textarea,
+.form-group > input,
+.form-group > select,
+.form-group > textarea,
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 53px;
+  padding: 13px 17px;
+
+  border: 1.5px solid var(--border);
+  border-radius: 13px;
+
+  background: var(--logo-warm-bg);
+  color: var(--logo-dark);
+
+  outline: none;
+  text-align: right;
+
+  transition:
+    border-color .3s ease,
+    background .3s ease,
+    box-shadow .3s ease;
+}
+
+.field > input:focus,
+.field > select:focus,
+.field > textarea:focus,
+.form-group > input:focus,
+.form-group > select:focus,
+.form-group > textarea:focus,
+.form-control:focus {
+  border-color: var(--logo-gold);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(192,123,40,.1);
+}
+
+.field > input::placeholder,
+.field > textarea::placeholder,
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+.field > textarea,
+.form-group > textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+input[type="email"],
+input[type="password"] {
+  direction: ltr;
+  text-align: right;
+}
+
+.field > input[aria-invalid="true"],
+.field > select[aria-invalid="true"],
+.field > textarea[aria-invalid="true"],
+.field > input.invalid,
+.field > select.invalid,
+.form-control.invalid {
+  border-color: var(--logo-red);
+  background: #FFF3F2;
+  box-shadow: 0 0 0 3px rgba(158,42,43,.07);
+}
+
+/* =========================================
+   19 - رسائل التحقق من الحقول
+========================================= */
+
+.field-error,
+.error-text,
+.error-message {
+  display: block;
+  margin-top: 7px;
+  color: var(--logo-red);
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.field-error:empty,
+.error-text:empty {
+  display: none;
+}
+
+/* =========================================
+   20 - مربع الموافقة
+========================================= */
+
+.checkline,
+.checkbox-row,
+.checkbox-group,
+.consent-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 18px 20px;
+  margin: 0;
+  background: var(--red-light);
+  border: 1px solid rgba(158,42,43,.15);
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.checkline input[type="checkbox"],
+.checkbox-row input[type="checkbox"],
+.checkbox-group input[type="checkbox"],
+.consent-row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 6px;
+  accent-color: var(--logo-red);
+  cursor: pointer;
+}
+
+.checkline span,
+.checkbox-row span {
+  color: var(--red-dark);
+  font-size: .88rem;
+  font-weight: 700;
+  line-height: 2;
+}
+
+.checkline:has(input:checked) {
+  border-color: rgba(192,123,40,.45);
+  background: var(--gold-pale);
+}
+
+/* =========================================
+   21 - أزرار النموذج
+========================================= */
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.primary-btn,
+.submit-btn,
+.btn-danger,
+button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 54px;
+  padding: 13px 32px;
+
+  border: 1px solid transparent;
+  border-radius: 14px;
+
+  color: white;
+  background: linear-gradient(
+    135deg,
+    var(--logo-red),
+    var(--red-dark)
+  );
+
+  font-size: .91rem;
+  font-weight: 900;
+
+  box-shadow: 0 12px 28px rgba(158,42,43,.17);
+
+  transition: all .3s ease;
+}
+
+.primary-btn:hover,
+.submit-btn:hover,
+.btn-danger:hover,
+button[type="submit"]:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.07);
+  box-shadow: 0 16px 35px rgba(158,42,43,.24);
+}
+
+.primary-btn:active,
+.submit-btn:active,
+button[type="submit"]:active {
+  transform: scale(.97);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 28px;
+  min-height: 52px;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    var(--logo-gold),
+    var(--gold-dark)
+  );
+  font-weight: 900;
+  transition: all .3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(192,123,40,.2);
+}
+
+button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* =========================================
+   22 - حالة نموذج الحذف
+========================================= */
+
+.form-status,
+.form-message,
+#form-message,
+#formMessage {
+  display: none;
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-radius: 13px;
+  font-size: .88rem;
+  font-weight: 800;
+  line-height: 1.9;
+}
+
+.form-status:not(:empty),
+.form-message.show,
+#form-message.show,
+#formMessage.show {
+  display: block;
+}
+
+.form-status.error,
+.form-message.error,
+#form-message.error,
+#formMessage.error {
+  color: var(--logo-red);
+  background: var(--red-light);
+  border: 1px solid rgba(158,42,43,.15);
+  border-right: 4px solid var(--logo-red);
+}
+
+.form-status.success,
+.form-message.success,
+#form-message.success,
+#formMessage.success {
+  color: #256E45;
+  background: #EAF7EF;
+  border: 1px solid rgba(37,110,69,.15);
+  border-right: 4px solid #256E45;
+}
+
+.form-status.info {
+  color: var(--gold-dark);
+  background: var(--gold-pale);
+  border-right: 4px solid var(--logo-gold);
+}
+
+/* =========================================
+   23 - الفوتر
+========================================= */
+
+.site-footer {
+  position: relative;
+  margin-top: 0;
+  padding: 50px 0 25px;
+  color: var(--logo-white);
+  background: var(--logo-dark);
+  overflow: hidden;
+}
+
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--logo-red),
+    var(--logo-gold),
+    var(--logo-red)
+  );
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding-bottom: 35px;
+}
+
+.site-footer .brand-title strong {
+  color: white;
+}
+
+.site-footer .brand-title > span {
+  color: #E4B775;
+}
+
+.site-footer .brand > img {
+  background: white;
+  border-color: rgba(255,255,255,.12);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+.footer-links a {
+  padding: 10px 17px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  color: #D5CEC5;
+  font-size: .86rem;
+  font-weight: 700;
+  transition: .3s ease;
+}
+
+.footer-links a:hover {
+  color: white;
+  background: rgba(192,123,40,.25);
+  border-color: var(--logo-gold);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding-top: 23px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  color: #AAA39A;
+  font-size: .8rem;
+}
+
+/* =========================================
+   24 - تأثيرات الظهور
+========================================= */
+
+[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(25px);
+  transition:
+    opacity .75s var(--ease),
+    transform .75s var(--ease);
+}
+
+.reveal-ready [data-reveal].visible,
+.reveal-ready [data-reveal].is-visible,
+.reveal-ready [data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================
+   25 - شريط التمرير
+========================================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--logo-warm-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D3A166;
+  border-radius: 20px;
+  border: 2px solid var(--logo-warm-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--logo-gold);
+}
+
+/* =========================================
+   26 - أجهزة التابلت
+========================================= */
+
+@media (max-width: 1000px) {
+  .privacy-layout {
+    grid-template-columns: 235px minmax(0,1fr);
+    gap: 22px;
+  }
+
+  .toc {
+    padding: 22px 13px;
+  }
+
+  .toc-links a {
+    font-size: .76rem;
+  }
+
+  .brand-title strong {
+    font-size: 1.12rem;
+  }
+
+  .steps,
+  .steps-grid {
+    gap: 13px;
+  }
+
+  .step,
+  .step-card {
+    padding: 23px 18px;
+  }
+}
+
+/* =========================================
+   27 - الجوال
+========================================= */
+
+@media (max-width: 768px) {
+  :root {
+    --header-height: 72px;
+  }
+
+  .container {
+    width: calc(100% - 30px);
+  }
+
+  .header-inner {
+    gap: 10px;
+  }
+
+  .desktop-nav {
+    display: none;
+  }
+
+  .brand > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+  }
+
+  .brand-title strong {
+    font-size: 1rem;
+  }
+
+  .brand-title > span {
+    font-size: .48rem;
+    letter-spacing: 1px;
+  }
+
+  .menu-trigger {
+    min-height: 43px;
+    padding: 9px 13px;
+    font-size: .8rem;
+  }
+
+  .hero {
+    padding: 65px 0 70px;
+  }
+
+  .hero::before {
+    width: 250px;
+    height: 250px;
+    top: -130px;
+    right: -120px;
+    border-width: 40px;
+  }
+
+  .hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .hero-inner > p {
+    font-size: .92rem;
+    line-height: 2;
+  }
+
+  .hero-meta {
+    gap: 8px;
+  }
+
+  .chip {
+    font-size: .73rem;
+    padding: 7px 12px;
+  }
+
+  .main {
+    padding: 35px 0 65px;
+  }
+
+  .privacy-layout {
+    grid-template-columns: minmax(0,1fr);
+    gap: 23px;
+  }
+
+  .toc {
+    position: relative;
+    top: auto;
+    max-height: none;
+    padding: 22px;
+  }
+
+  .toc-links {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 6px;
+  }
+
+  .toc-links a {
+    font-size: .75rem;
+    padding: 9px 10px;
+  }
+
+  .panel {
+    padding: 25px 21px;
+    border-radius: 20px;
+  }
+
+  .panel h2 {
+    font-size: 1.15rem;
+    gap: 12px;
+  }
+
+  .panel h2 .num {
+    width: 43px;
+    height: 43px;
+    border-radius: 12px;
+    font-size: .85rem;
+  }
+
+  .panel p {
+    font-size: .91rem;
+  }
+
+  /* حذف الحساب */
+
+  .delete-wrap {
+    width: 100%;
+  }
+
+  .steps,
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .step,
+  .step-card {
+    padding: 25px 22px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .field.wide {
+    grid-column: auto;
+  }
+
+  .form-actions {
+    align-items: stretch;
+  }
+
+  .primary-btn,
+  .submit-btn,
+  button[type="submit"] {
+    width: 100%;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  /* الفوتر */
+
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* =========================================
+   28 - الجوال الصغير
+========================================= */
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 26px);
+  }
+
+  .hero {
+    padding: 54px 0 60px;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .eyebrow {
+    font-size: .75rem;
+  }
+
+  .hero-inner > p {
+    font-size: .86rem;
+  }
+
+  .toc-links {
+    grid-template-columns: 1fr;
+  }
+
+  .toc-links a {
+    font-size: .83rem;
+  }
+
+  .panel {
+    padding: 23px 17px;
+  }
+
+  .panel h2 {
+    font-size: 1.06rem;
+  }
+
+  .panel p {
+    font-size: .88rem;
+  }
+
+  .notice {
+    padding: 19px 17px;
+    font-size: .86rem;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-title > span {
+    letter-spacing: .5px;
+  }
+
+  .drawer {
+    width: min(340px, 92vw);
+  }
+
+  .step-number {
+    width: 48px;
+    height: 48px;
+  }
+
+  .checkline,
+  .checkbox-row {
+    padding: 16px 14px;
+  }
+
+  .checkline span {
+    font-size: .82rem;
+  }
+
+  .field > input:not([type="checkbox"]),
+  .field > select {
+    font-size: .88rem;
+  }
+}
+
+/* =========================================
+   29 - تقليل الحركة
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
