@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102f2a">
+  <meta name="description" content="صفحة طلب حذف الحساب والبيانات الخاصة بمستخدمي تطبيق مطاعم برج القاهرة وفقاً لسياسات Google Play الحاكمة.">
+  <title>حذف الحساب | مطاعم برج القاهرة</title>
+  <link rel="icon" href="../restaurant_logo_reference.png" type="image/png">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../app.js" defer></script>
+</head>
+<body>
+  <!-- شريط تقدم التمرير -->
+  <div id="scroll-progress" class="progress" aria-hidden="true"></div>
+
+  <!-- الهيدر -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../privacy/privacy.html" aria-label="مطاعم برج القاهرة — حذف الحساب">
+        <img src="../restaurant_logo_reference.png" alt="شعار مطاعم برج القاهرة">
+        <span class="brand-title">
+          <strong>مطاعم برج القاهرة</strong>
+          <span>للأكلات المصرية والمشويات</span>
+        </span>
+      </a>
+      <nav class="desktop-nav" aria-label="التنقل الرئيسي">
+        <a class="nav-link" href="../privacy/privacy.html">سياسة الخصوصية</a>
+        <a class="nav-link" href="../terms/terms.html">شروط الاستخدام</a>
+        <a class="nav-link" href="delete-account.html" aria-current="page">حذف الحساب</a>
+      </nav>
+      <button class="menu-trigger" id="open-menu" aria-controls="site-drawer" aria-expanded="false">
+        القائمة
+      </button>
+    </div>
+  </header>
+
+  <!-- القائمة الجانبية -->
+  <div class="overlay" id="drawer-overlay" aria-hidden="true"></div>
+  <aside class="drawer" id="site-drawer" aria-label="القائمة الجانبية" aria-hidden="true">
+    <div class="drawer-head">
+      <strong>القائمة الرئيسية</strong>
+      <button class="close-btn" id="close-menu" aria-label="إغلاق القائمة">&times;</button>
+    </div>
+    <p class="drawer-label">الصفحات القانونية</p>
+    <a class="drawer-link" href="../privacy/privacy.html">سياسة الخصوصية</a>
+    <a class="drawer-link" href="../terms/terms.html">شروط الاستخدام</a>
+    <a class="drawer-link" href="delete-account.html" aria-current="page">طلب حذف الحساب</a>
+    <div class="drawer-bottom">أهلاً بكم في مطاعم برج القاهرة.</div>
+  </aside>
+
+  <!-- مقدمة الصفحة -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="eyebrow">التحكم بالبيانات</span>
+      <h1>طلب حذف الحساب والبيانات</h1>
+      <p>يمكنك تقديم طلب رسمي لحذف حسابك والبيانات المرتبطة به نهائياً من أنظمتنا وفقاً لسياسات جوجل بلاي لحماية الخصوصية.</p>
+    </div>
+  </section>
+
+  <!-- المحتوى الرئيسي -->
+  <main class="main">
+    <div class="container" style="max-width: 750px;">
+      <div class="panel">
+        <h2>تقديم طلب حذف الحساب والبيانات الشخصية</h2>
+        <p style="margin-bottom: 20px;">عند تقديم هذا الطلب، ستقوم إدارة مطاعم برج القاهرة بحذف كافة بيانات الحساب، بما في ذلك الاسم، رقم الهاتف، والبريد الإلكتروني من قواعد بياناتنا بشكل نهائي.</p>
+        
+        <form id="delete-account-form">
+          <div class="form-group">
+            <label for="user-phone">رقم الهاتف المسجل في التطبيق *</label>
+            <input type="tel" id="user-phone" class="form-control" placeholder="مثال: +967 771 905 178" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="user-email">البريد الإلكتروني (اختياري)</label>
+            <input type="email" id="user-email" class="form-control" placeholder="example@gmail.com">
+          </div>
+
+          <div class="form-group">
+            <label for="reason">سبب طلب الحذف (اختياري)</label>
+            <textarea id="reason" class="form-control" placeholder="يرجى توضيح السبب لمساعدتنا على تحسين الخدمة..."></textarea>
+          </div>
+
+          <div class="danger-box">
+            <strong style="color: #dc3545; display: block; margin-bottom: 5px;">تنبيه مهم:</strong>
+            عملية حذف الحساب عملية نهائية ولا يمكن التراجع عنها، وستفقد إمكانية الوصول إلى سجل الطلبات السابق داخل التطبيق.
+          </div>
+
+          <div style="margin-top: 25px;">
+            <button type="submit" class="btn-danger">تأكيد إرسال طلب الحذف</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- إفصاح التاجر والمعلومات -->
+      <div class="panel" style="margin-top: 25px;">
+        <h2>بيانات التواصل مع مسؤول البيانات</h2>
+        <p>يمكنكم أيضاً التواصل المباشر مع إدارة المطاعم لمتابعة طلبات الحذف أو للاستفسارات:</p>
+        <p style="margin-top: 10px; line-height: 1.8;">
+          <strong>الجهة:</strong> مطاعم برج القاهرة (للأكلات المصرية والمشويات)<br>
+          <strong>المالك:</strong> عبد الله محمد أحمد الخولاني<br>
+          <strong>العنوان:</strong> اليمن - شارع حدة - جوار حلمي للعسل<br>
+          <strong>البريد الإلكتروني:</strong> burjalqahirarestau@gmail.com<br>
+          <strong>الهاتف:</strong> +967 771 905 178
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- الفوتر -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <a class="brand" href="../privacy/privacy.html">
+          <img src="../restaurant_logo_reference.png" alt="شعار مطاعم برج القاهرة">
+          <span class="brand-title">
+            <strong>مطاعم برج القاهرة</strong>
+            <span>للأكلات المصرية والمشويات</span>
+          </span>
+        </a>
+        <nav class="footer-links" aria-label="روابط الفوتر">
+          <a href="../privacy/privacy.html">سياسة الخصوصية</a>
+          <a href="../terms/terms.html">شروط الاستخدام</a>
+          <a href="delete-account.html">حذف الحساب</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 مطاعم برج القاهرة. جميع الحقوق محفوظة.</span>
+        <span>المالك: عبد الله محمد أحمد الخولاني</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
